@@ -1,0 +1,28 @@
+# Composer Dependencies
+/vendor
+composer.lock
+
+# Environment Variables
+.env
+.env.example
+.env.phpunit
+
+# PHPUnit / Testing Artifacts
+/build
+/coverage
+.phpunit.result.cache
+
+# IDE / Editor Settings
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
