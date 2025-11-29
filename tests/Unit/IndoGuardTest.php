@@ -29,6 +29,27 @@ class IndoGuardTest extends TestCase
         $this->assertTrue($guard->hasBadWords($text2), "Failed detecting 'j.u.d.i'");
     }
 
+    #[Test] 
+    public function it_can_detect_profanity_and_toxic_words()
+    {
+        $guard = app('indo-guard');
+        
+        $text = "Dasar anj1ng lu!";
+        $this->assertTrue($guard->hasBadWords($text), "Gagal mendeteksi kata kasar/profanity");
+        
+        $clean = $guard->sanitize($text);
+        $this->assertStringContainsString('******', $clean);
+    }
+
+    #[Test]
+    public function it_can_detect_single_gambling_keywords()
+    {
+        $guard = app('indo-guard');
+        
+        $text = "Ayo main slot sekarang";
+        $this->assertTrue($guard->hasBadWords($text), "Gagal mendeteksi single keyword 'slot'");
+    }
+
     #[Test]
     public function it_does_not_flag_safe_words_containing_bad_substrings()
     {
@@ -42,7 +63,7 @@ class IndoGuardTest extends TestCase
     #[Test]
     public function it_can_use_facade_accessor()
     {
-        $text = "Hello World!";
+        $text = "Halo dunia";
         $clean = app('indo-guard')->sanitize($text); 
         
         $this->assertEquals($text, $clean);

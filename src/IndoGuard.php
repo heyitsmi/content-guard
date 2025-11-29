@@ -24,13 +24,15 @@ class IndoGuard
      */
     protected string $maskChar;
 
-public function __construct()
+    public function __construct()
     {
-        $gamblingList = require __DIR__ . '/Dictionary/gambling.php';
-        $userKeywords = config('indo-guard.keywords', []);
-        $this->badWords = array_merge($gamblingList, $userKeywords);
-        $this->substitutionMap = config('indo-guard.substitution_map', []);
-        $this->maskChar = config('indo-guard.mask_char', '*');
+        $gamblingList           = require __DIR__ . '/Dictionary/gambling.php';
+        $profanityPath          = __DIR__ . '/Dictionary/profanity.php';
+        $profanityList          = file_exists($profanityPath) ? require $profanityPath : [];
+        $userKeywords           = config('indo-guard.keywords', []);
+        $this->badWords         = array_merge($gamblingList, $profanityList, $userKeywords);
+        $this->substitutionMap  = config('indo-guard.substitution_map', []);
+        $this->maskChar         = config('indo-guard.mask_char', '*');
     }
 
     /**

@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'judi',
+    'slot',
+    'gacor',
+    'togel',
+    'poker',
     'judi online',
     'judi bola',
     'bandar judi',
