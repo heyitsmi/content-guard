@@ -1,16 +1,16 @@
 <?php
 
-namespace Heyitsmi\IndoGuard\Tests\Unit;
+namespace Heyitsmi\ContentGuard\Tests\Unit;
 
-use Heyitsmi\IndoGuard\Tests\TestCase;
+use Heyitsmi\ContentGuard\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-class IndoGuardTest extends TestCase
+class ContentGuardTest extends TestCase
 {
     #[Test]
     public function it_can_detect_basic_bad_words()
     {
-        $guard = app('indo-guard');
+        $guard = app('content-guard');
         $text = "Jangan main judi disini";
 
         $this->assertTrue($guard->hasBadWords($text));
@@ -20,7 +20,7 @@ class IndoGuardTest extends TestCase
     #[Test]
     public function it_can_detect_leet_speak_variations()
     {
-        $guard = app('indo-guard');
+        $guard = app('content-guard');
         
         $text1 = "Situs s1ot terpercaya";
         $this->assertTrue($guard->hasBadWords($text1), "Failed detecting 's1ot'");
@@ -32,7 +32,7 @@ class IndoGuardTest extends TestCase
     #[Test] 
     public function it_can_detect_profanity_and_toxic_words()
     {
-        $guard = app('indo-guard');
+        $guard = app('content-guard');
         
         $text = "Dasar anj1ng lu!";
         $this->assertTrue($guard->hasBadWords($text), "Gagal mendeteksi kata kasar/profanity");
@@ -44,7 +44,7 @@ class IndoGuardTest extends TestCase
     #[Test]
     public function it_can_detect_single_gambling_keywords()
     {
-        $guard = app('indo-guard');
+        $guard = app('content-guard');
         
         $text = "Ayo main slot sekarang";
         $this->assertTrue($guard->hasBadWords($text), "Gagal mendeteksi single keyword 'slot'");
@@ -53,7 +53,7 @@ class IndoGuardTest extends TestCase
     #[Test]
     public function it_does_not_flag_safe_words_containing_bad_substrings()
     {
-        $guard = app('indo-guard');
+        $guard = app('content-guard');
         $safeText = "Saya beli kasur di makasar";
         
         $this->assertFalse($guard->hasBadWords($safeText));
@@ -64,7 +64,7 @@ class IndoGuardTest extends TestCase
     public function it_can_use_facade_accessor()
     {
         $text = "Halo dunia";
-        $clean = app('indo-guard')->sanitize($text); 
+        $clean = app('content-guard')->sanitize($text); 
         
         $this->assertEquals($text, $clean);
     }

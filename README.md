@@ -1,9 +1,9 @@
 
-# IndoGuard
+# ContentGuard
 
-**IndoGuard** is a robust PHP content sanitization library specifically designed for the **Indonesian** web ecosystem. It helps developers filter out online gambling spam (*judi online*), profanity, and hate speech with advanced detection capabilities.
+**ContentGuard** is a robust PHP content sanitization library specifically designed for the **Indonesian** web ecosystem. It helps developers filter out online gambling spam (*judi online*), profanity, and hate speech with advanced detection capabilities.
 
-Unlike simple string replacement tools, IndoGuard uses an intelligent **Regex Engine** to detect "Leet Speak" (visual masking) commonly used by spammers (e.g., detecting `s10t g4c0r` as `slot gacor`).
+Unlike simple string replacement tools, ContentGuard uses an intelligent **Regex Engine** to detect "Leet Speak" (visual masking) commonly used by spammers (e.g., detecting `s10t g4c0r` as `slot gacor`).
 
 ## Features
 
@@ -18,7 +18,7 @@ Unlike simple string replacement tools, IndoGuard uses an intelligent **Regex En
 You can install the package via composer:
 
 ```bash
-composer require heyitsmi/indo-guard
+composer require heyitsmi/content-guard
 ```
 ## Configuration (Laravel)
 
@@ -26,36 +26,36 @@ If you are using Laravel, you can publish the configuration file to customize th
 
 Run the following command:
 ```bash
-php artisan vendor:publish --tag="indo-guard-config"
+php artisan vendor:publish --tag="content-guard-config"
 ```
-This will create a `config/indo-guard.php` file in your application.
+This will create a `config/content-guard.php` file in your application.
 
 ## Usage
 
 ### 1. Using Laravel Facade (Recommended for Laravel)
 
-You can use the `IndoGuard` facade anywhere in your controllers, jobs, or blade directives.
+You can use the `ContentGuard` facade anywhere in your controllers, jobs, or blade directives.
 ```php
-use Heyitsmi\IndoGuard\Facades\IndoGuard;
+use Heyitsmi\ContentGuard\Facades\ContentGuard;
 
 // 1. Check if text contains bad words (returns boolean)
-$isSpam = IndoGuard::hasBadWords("Ayo main s10t g4c0r hari ini!"); 
+$isSpam = ContentGuard::hasBadWords("Ayo main s10t g4c0r hari ini!"); 
 
 if ($isSpam) {
     return back()->withErrors(['message' => 'Your comment contains restricted content.']);
 }
 
 // 2. Sanitize text (returns clean string)
-$cleanText = IndoGuard::sanitize("Jangan main judi online!");
+$cleanText = ContentGuard::sanitize("Jangan main judi online!");
 // Output: "Jangan main **** ******!"
 ```
 ### 2. Standalone PHP Usage
 
 If you are not using Laravel, you can instantiate the class directly.
 ```php
-use Heyitsmi\IndoGuard\IndoGuard;
+use Heyitsmi\ContentGuard\ContentGuard;
 
-$guard = new IndoGuard();
+$guard = new ContentGuard();
 
 $input = "Situs g.a.c.o.r terpercaya";
 
@@ -67,7 +67,7 @@ echo $guard->sanitize($input);
 ```
 ## How It Works
 
-IndoGuard converts standard keywords into flexible Regex patterns based on a Substitution Map.
+ContentGuard converts standard keywords into flexible Regex patterns based on a Substitution Map.
 
 -   **Input:** `slot`
     

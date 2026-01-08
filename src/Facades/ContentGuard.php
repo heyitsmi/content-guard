@@ -1,15 +1,15 @@
 <?php
 
-namespace Heyitsmi\IndoGuard\Facades;
+namespace Heyitsmi\ContentGuard\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static string sanitize(string $text)
  * @method static bool hasBadWords(string $text)
- * * @see \Heyitsmi\IndoGuard\IndoGuard
+ * * @see \Heyitsmi\ContentGuard\ContentGuard
  */
-class IndoGuard extends Facade
+class ContentGuard extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -19,6 +19,6 @@ class IndoGuard extends Facade
     protected static function getFacadeAccessor()
     {
         // This matches the bind key in your ServiceProvider
-        return 'indo-guard';
+        return 'content-guard';
     }
 }

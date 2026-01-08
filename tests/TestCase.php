@@ -1,9 +1,9 @@
 <?php
 
-namespace Heyitsmi\IndoGuard\Tests;
+namespace Heyitsmi\ContentGuard\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Heyitsmi\IndoGuard\IndoGuardServiceProvider;
+use Heyitsmi\ContentGuard\ContentGuardServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -16,7 +16,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            IndoGuardServiceProvider::class,
+            ContentGuardServiceProvider::class,
         ];
     }
 
@@ -29,9 +29,9 @@ class TestCase extends Orchestra
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('indo-guard.mask_char', '*');
+        $app['config']->set('content-guard.mask_char', '*');
         
-        $app['config']->set('indo-guard.substitution_map', [
+        $app['config']->set('content-guard.substitution_map', [
             'a' => '(a|4|@)',
             'i' => '(i|1|!)',
             'o' => '(o|0)',
@@ -40,7 +40,7 @@ class TestCase extends Orchestra
             't' => '(t|7|\\+)',
         ]);
 
-        $app['config']->set('indo-guard.keywords', [
+        $app['config']->set('content-guard.keywords', [
             'judi',
             'slot',
             'kasar'

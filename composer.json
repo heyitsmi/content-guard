@@ -1,6 +1,6 @@
 {
-    "name": "heyitsmi/indo-guard",
-    "description": "A content sanitization library to filter negative content and online gambling spam specifically for Indonesia.",
+    "name": "heyitsmi/content-guard",
+    "description": "A content sanitization library to filter negative content and online gambling spam.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -23,21 +23,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Heyitsmi\\IndoGuard\\": "src/"
+            "Heyitsmi\\ContentGuard\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Heyitsmi\\IndoGuard\\Tests\\": "tests/"
+            "Heyitsmi\\ContentGuard\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Heyitsmi\\IndoGuard\\IndoGuardServiceProvider"
+                "Heyitsmi\\ContentGuard\\ContentGuardServiceProvider"
             ],
             "aliases": {
-                "IndoGuard": "Heyitsmi\\IndoGuard\\Facades\\IndoGuard"
+                "ContentGuard": "Heyitsmi\\ContentGuard\\Facades\\ContentGuard"
             }
         }
     },

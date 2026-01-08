@@ -1,12 +1,16 @@
 # Changelog
 
-All notable changes to `indo-guard` will be documented in this file.
+All notable changes to `content-guard` will be documented in this file.
+
+## [Unreleased]
+- Renamed package from `IndoGuard` to `ContentGuard`.
+- Changed namespace from `Heyitsmi\IndoGuard` to `Heyitsmi\ContentGuard`.
 
 ## [Unreleased] - Work in Progress
 
 ### Added
 - New **Profanity Dictionary** (`src/Dictionary/profanity.php`) to filter toxic comments, hate speech, and dirty words.
-- Logic to merge multiple dictionaries automatically in `IndoGuard` class.
+- Logic to merge multiple dictionaries automatically in `ContentGuard` class.
 - Added single keywords ('slot', 'judi', 'gacor') to `gambling.php` for stricter filtering.
 
 ### Changed

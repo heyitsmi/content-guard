@@ -1,10 +1,10 @@
 <?php
 
-namespace Heyitsmi\IndoGuard;
+namespace Heyitsmi\ContentGuard;
 
 use Illuminate\Support\Str;
 
-class IndoGuard
+class ContentGuard
 {
     /**
      * The list of blocked keywords.
@@ -29,10 +29,10 @@ class IndoGuard
         $gamblingList           = require __DIR__ . '/Dictionary/gambling.php';
         $profanityPath          = __DIR__ . '/Dictionary/profanity.php';
         $profanityList          = file_exists($profanityPath) ? require $profanityPath : [];
-        $userKeywords           = config('indo-guard.keywords', []);
+        $userKeywords           = config('content-guard.keywords', []);
         $this->badWords         = array_merge($gamblingList, $profanityList, $userKeywords);
-        $this->substitutionMap  = config('indo-guard.substitution_map', []);
-        $this->maskChar         = config('indo-guard.mask_char', '*');
+        $this->substitutionMap  = config('content-guard.substitution_map', []);
+        $this->maskChar         = config('content-guard.mask_char', '*');
     }
 
     /**
