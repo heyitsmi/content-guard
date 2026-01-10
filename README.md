@@ -65,6 +65,42 @@ if ($guard->hasBadWords($input)) {
 
 echo $guard->sanitize($input);
 ```
+
+### 3. Client-side Masking (Blur or Hidden)
+
+ContentGuard can wrap detected words in HTML tags, allowing you to use CSS and JavaScript for a premium "click-to-reveal" experience.
+
+#### Publication (Laravel)
+Publish the assets (CSS and JS):
+```bash
+php artisan vendor:publish --tag="content-guard-assets"
+```
+
+#### Assets Inclusion
+In your layout file (e.g., `app.blade.php`), inclusion the assets using the blade directive:
+```html
+<head>
+    ...
+    @contentGuardAssets
+</head>
+```
+
+#### Usage
+Use the `wrap()` method instead of `sanitize()` to get HTML-tagged content:
+```php
+$text = "Bocoran slot gacor hari ini";
+
+// Default is 'blur'
+echo ContentGuard::wrap($text); 
+
+// Or use 'mask' for a solid black box
+echo ContentGuard::wrap($text, 'mask');
+```
+
+The `wrap()` method will generate:
+`<span class="cg-word cg-blur" data-cg-word="slot">slot</span>`
+
+Users can click on the blurred/masked word to reveal the original content.
 ## How It Works
 
 ContentGuard converts standard keywords into flexible Regex patterns based on a Substitution Map.

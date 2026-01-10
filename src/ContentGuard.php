@@ -46,8 +46,6 @@ class ContentGuard
         foreach ($this->badWords as $word) {
             $pattern = $this->generateRegexPattern($word);
             
-            // Execute replacement
-            // We use a callback to maintain the length of the original matched string
             $text = preg_replace_callback($pattern, function ($matches) {
                 return str_repeat($this->maskChar, strlen($matches[0]));
             }, $text);
@@ -100,13 +98,58 @@ class ContentGuard
             }
         }
 
-        // Join characters with a pattern allowing symbols/spaces in between
-        // [\W_]* allows for things like "j.u.d.i" or "j-u-d-i"
         $innerPattern = implode('[\W_]*', $patternBuilder);
-
-        // Add Word Boundaries (\b) to prevent false positives (e.g., 'anal' in 'analysis')
-        // We use lookahead/lookbehind or standard \b depending on complexity, 
-        // but for now standard \b is safer.
         return '/\b' . $innerPattern . '\b/i';
+    }
+
+    /**
+     * Wrap bad words with HTML tags for front-end blurring/masking.
+     *
+     * @param string $text
+     * @param string|null $type ('blur', 'mask', or null to use default)
+     * @return string
+     */
+    public function wrap(string $text, ?string $type = null): string
+    {
+        $type = $type ?? config('content-guard.default_wrap_type', 'blur');
+
+        foreach ($this->badWords as $word) {
+            $pattern = $this->generateRegexPattern($word);
+            
+            $text = preg_replace_callback($pattern, function ($matches) use ($type) {
+                return '<span class="cg-word cg-' . $type . '" data-cg-word="' . htmlspecialchars($matches[0]) . '"><span class="cg-inner">' . $matches[0] . '</span></span>';
+            }, $text);
+        }
+
+        return $text;
+    }
+
+    /**
+     * Output the necessary CSS for ContentGuard masking.
+     *
+     * @return string
+     */
+    public function styles(): string
+    {
+        // Check if helper function 'asset' exists (Laravel)
+        if (function_exists('asset')) {
+            return '<link rel="stylesheet" href="' . asset('vendor/content-guard/css/content-guard.css') . '">';
+        }
+        
+        return '<!-- ContentGuard: asset() helper not found. Please include CSS manually. -->';
+    }
+
+    /**
+     * Output the necessary JavaScript for ContentGuard masking.
+     *
+     * @return string
+     */
+    public function scripts(): string
+    {
+        if (function_exists('asset')) {
+            return '<script src="' . asset('vendor/content-guard/js/content-guard.js') . '"></script>';
+        }
+
+        return '<!-- ContentGuard: asset() helper not found. Please include JS manually. -->';
     }
 }

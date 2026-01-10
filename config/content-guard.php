@@ -61,4 +61,16 @@ return [
         // 'specific_spam_keyword',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default Wrap Type
+    |--------------------------------------------------------------------------
+    |
+    | When using the wrap() method, this specifies the default effect.
+    | Options: 'blur', 'mask'
+    |
+    */
+
+    'default_wrap_type' => 'blur',
+
 ];

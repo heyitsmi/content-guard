@@ -1,0 +1,77 @@
+.cg-word {
+    display: inline-block;
+    position: relative;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    vertical-align: middle;
+    isolation: isolate;
+}
+
+.cg-inner {
+    display: inline-block;
+    transition: filter 0.3s ease;
+}
+
+.cg-blur .cg-inner {
+    filter: blur(5px);
+    cursor: pointer;
+    user-select: none;
+}
+
+.cg-blur:hover .cg-inner {
+    filter: blur(2px);
+}
+
+.cg-word.cg-revealed .cg-inner {
+    filter: blur(0);
+    cursor: default;
+    user-select: auto;
+}
+
+.cg-mask .cg-inner {
+    background-color: #333;
+    color: transparent !important;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 2px;
+}
+
+.cg-mask:hover .cg-inner {
+    background-color: #444;
+}
+
+.cg-word.cg-revealed.cg-mask .cg-inner {
+    background-color: transparent;
+    color: inherit !important;
+    cursor: default;
+    user-select: auto;
+}
+
+.cg-word::after {
+    content: "Content protected by ContentGuard";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #1a1a1a;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+}
+
+.cg-word:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.cg-word.cg-revealed::after {
+    display: none;
+}
